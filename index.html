@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema IA - Datos Ensenada</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Sistema de Inteligencia Artificial</h1>
+            <p>Análisis de datos de Ensenada</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Sección de Estadísticas -->
+            <section class="card">
+                <h2>📈 Estadísticas Generales</h2>
+                <div id="estadisticas" class="stats-container">
+                    <p>Cargando estadísticas...</p>
+                </div>
+                <button onclick="cargarEstadisticas()">Actualizar Estadísticas</button>
+            </section>
+
+            <!-- Sección de Datos -->
+            <section class="card">
+                <h2>📋 Datos del Excel</h2>
+                <div class="controls">
+                    <input type="number" id="limite" placeholder="Límite de registros" value="10">
+                    <button onclick="cargarDatos()">Cargar Datos</button>
+                </div>
+                <div id="datos-container" class="table-container">
+                    <p>Los datos aparecerán aquí...</p>
+                </div>
+            </section>
+
+            <!-- Sección de Filtros IA -->
+            <section class="card">
+                <h2>🔍 Filtros Inteligentes</h2>
+                <div class="filtros">
+                    <select id="columna">
+                        <option value="">Selecciona columna</option>
+                    </select>
+                    <input type="text" id="valor" placeholder="Valor a buscar">
+                    <button onclick="filtrarDatos()">Filtrar con IA</button>
+                </div>
+                <div id="filtros-resultado"></div>
+            </section>
+
+            <!-- Sección de Análisis IA -->
+            <section class="card">
+                <h2>🤖 Análisis IA</h2>
+                <select id="tipo-analisis">
+                    <option value="estadisticas">Estadísticas Básicas</option>
+                    <option value="patrones">Detección de Patrones</option>
+                    <option value="prediccion">Análisis Predictivo</option>
+                </select>
+                <button onclick="analizarDatos()">Ejecutar Análisis</button>
+                <div id="analisis-resultado"></div>
+            </section>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
