@@ -19,4 +19,224 @@ Campo	Detalle
 📚 Materia	Desarrollo de APIs
 📝 Proyecto	Laboratorio APIs - Evaluación
 👩‍🎓 Estudiante	Alejandra Rodríguez de la Cruz
-**👩‍🏫 Docente	
+👩‍🏫 Docente	Xenia Padilla Madrid
+📅 Fecha	11 de Noviembre de 2025
+🚀 Inicio Rápido
+bash
+
+# 1. Clonar el repositorio
+git clone https://github.com/tu-usuario/gestion-citas-medicas.git
+
+# 2. Navegar al directorio del proyecto
+cd gestion-citas-medicas
+
+# 3. Instalar dependencias
+npm install
+
+# 4. Iniciar el servidor en modo desarrollo
+npm run dev
+
+# 5. El servidor estará disponible en:
+#    http://localhost:3000
+
+📚 Endpoints de la API
+👥 Pacientes (/pacientes)
+Método	Endpoint	Descripción	Estado
+POST	/pacientes	Registrar nuevo paciente	✅
+GET	/pacientes	Listar todos los pacientes	✅
+GET	/pacientes/:id	Obtener paciente por ID	✅
+PUT	/pacientes/:id	Actualizar datos del paciente	✅
+GET	/pacientes/:id/historial	Ver historial de citas	✅
+🩺 Doctores (/doctores)
+Método	Endpoint	Descripción	Estado
+POST	/doctores	Registrar nuevo doctor	✅
+GET	/doctores	Listar todos los doctores	✅
+GET	/doctores/:id	Obtener doctor por ID	✅
+GET	/doctores/especialidad/:especialidad	Buscar por especialidad	✅
+📅 Citas (/citas)
+Método	Endpoint	Descripción	Estado
+POST	/citas	Agendar nueva cita	✅
+GET	/citas	Listar todas las citas	✅
+GET	/citas/:id	Obtener cita específica	✅
+PUT	/citas/:id/cancelar	Cancelar cita	✅
+GET	/citas/doctor/:doctorId	Ver agenda del doctor	✅
+📊 Estadísticas (/estadisticas)
+Método	Endpoint	Descripción	Estado
+GET	/estadisticas/doctores	Citas por doctor	✅
+GET	/estadisticas/especialidades	Citas por especialidad	✅
+🧪 Ejemplos de Uso con cURL
+📝 Registrar un Paciente
+bash
+
+curl -X POST http://localhost:3000/pacientes \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Juan Sebastian",
+    "edad": 25,
+    "telefono": "646-123-4567",
+    "email": "juan.sebastian@email.com"
+  }'
+
+Respuesta Exitosa:
+json
+
+{
+  "success": true,
+  "message": "Paciente registrado exitosamente",
+  "data": {
+    "id": "P003",
+    "nombre": "Juan Sebastian",
+    "edad": 25,
+    "telefono": "646-123-4567",
+    "email": "juan.sebastian@email.com",
+    "fechaRegistro": "2025-11-11"
+  }
+}
+
+🗓️ Agendar una Cita Médica
+bash
+
+curl -X POST http://localhost:3000/citas \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pacienteId": "P001",
+    "doctorId": "D002",
+    "fecha": "2025-12-15",
+    "hora": "10:30",
+    "motivo": "Consulta de seguimiento"
+  }'
+
+🔍 Consultar Historial Médico
+bash
+
+curl http://localhost:3000/pacientes/P001/historial
+
+🩺 Buscar Doctores por Especialidad
+bash
+
+curl http://localhost:3000/doctores/especialidad/Cardiología
+
+⚠️ Validaciones Implementadas
+❌ Email Duplicado
+bash
+
+curl -X POST http://localhost:3000/pacientes \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Ana Duplicado",
+    "edad": 30,
+    "telefono": "555-9999",
+    "email": "ana.lopez@email.com"
+  }'
+
+Respuesta de Error:
+json
+
+{
+  "success": false,
+  "message": "Ya existe un paciente con este email"
+}
+
+⏰ Horario no Disponible
+
+Validaciones incluidas:
+
+    ✅ Doctor disponible en fecha específica
+
+    ✅ Horario dentro del rango laboral
+
+    ✅ Cita no duplicada en mismo horario
+
+    ✅ Paciente no tenga cita simultánea
+
+📅 Días no Laborales
+json
+
+{
+  "success": false,
+  "message": "El doctor no trabaja los Jueves"
+}
+
+📁 Estructura del Proyecto
+text
+
+gestion-citas-medicas/
+│
+├── server.js                 # Punto de entrada principal
+├── package.json              # Dependencias y scripts
+├── package-lock.json         # Control de versiones
+│
+├── data/                     # Base de datos JSON
+│   ├── pacientes.json        # Registro de pacientes
+│   ├── doctores.json        # Registro de doctores
+│   └── citas.json           # Historial de citas
+│
+├── controllers/              # Lógica de controladores
+│   ├── pacienteController.js
+│   ├── doctorController.js
+│   └── citaController.js
+│
+├── routes/                   # Definición de rutas
+│   ├── pacienteRoutes.js
+│   ├── doctorRoutes.js
+│   └── citaRoutes.js
+│
+└── middleware/              # Middlewares personalizados
+    └── validators.js        # Validaciones de entrada
+
+🛠️ Tecnologías Utilizadas
+<div align="center">
+Tecnología	Versión	Propósito
+https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white	18.x+	Entorno de ejecución
+https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white	4.x	Framework web
+https://img.shields.io/badge/-JSON-000000?logo=json&logoColor=white	-	Persistencia de datos
+https://img.shields.io/badge/-cURL-073551?logo=curl&logoColor=white	-	Pruebas de API
+</div>
+📊 Estadísticas del Sistema
+Consultar Estadísticas por Doctor:
+bash
+
+curl http://localhost:3000/estadisticas/doctores
+
+Consultar Estadísticas por Especialidad:
+bash
+
+curl http://localhost:3000/estadisticas/especialidades
+
+Respuesta Ejemplo:
+json
+
+{
+  "success": true,
+  "data": {
+    "doctor": "Dr. James Wilson",
+    "especialidad": "Oncología",
+    "totalCitas": 5
+  }
+}
+
+🤝 Cómo Contribuir
+
+    Fork el repositorio
+
+    Crea una rama para tu funcionalidad (git checkout -b feature/nueva-funcionalidad)
+
+    Commit tus cambios (git commit -m 'Agrega nueva funcionalidad')
+
+    Push a la rama (git push origin feature/nueva-funcionalidad)
+
+    Abre un Pull Request
+
+<div align="center">
+📞 Contacto y Soporte
+
+👩‍💻 Desarrolladora: Alejandra Rodríguez de la Cruz
+📧 Email: al22760045@ite.edu.mx
+🏫 Institución: Instituto Tecnológico de Ensenada
+</div><div align="center">
+📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
+
+© 2025 - MediGest Sistema de Citas Médicas
+</div>
